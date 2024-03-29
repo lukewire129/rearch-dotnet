@@ -199,4 +199,82 @@ public static class AsyncValueConvenienceExtensions
             _ => source,
         };
     }
+
+    /// <summary>
+    /// Maps a AsyncValue&lt;T&gt; into a AsyncValue&lt;TResult&gt; by applying
+    /// the given <paramref name="selector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of associated immutable value.</typeparam>
+    /// <typeparam name="TResult">Type of resulting immutable value.</typeparam>
+    /// <param name="source">The source of the optional value.</param>
+    /// <param name="selector">The selector to apply.</param>
+    /// <returns>
+    /// <paramref name="source"/> mapped via given <paramref name="selector"/>.
+    /// </returns>
+    public static AsyncValue<TResult> Select<T, TResult>(
+        this AsyncValue<T> source,
+        Func<T, TResult> selector)
+    {
+        return source.SelectMany(
+            data => new AsyncData<TResult>(selector(data)));
+    }
+
+    /// <summary>
+    /// Maps a AsyncValue&lt;T&gt; into a AsyncValue&lt;TResult&gt; by applying
+    /// the given <paramref name="selector"/>, and flattens the result.
+    /// </summary>
+    /// <typeparam name="T">Type of associated immutable value.</typeparam>
+    /// <typeparam name="TResult">Type of resulting immutable value.</typeparam>
+    /// <param name="source">The source of the optional value.</param>
+    /// <param name="selector">The selector to apply.</param>
+    /// <returns>
+    /// <paramref name="source"/> mapped via given <paramref name="selector"/>.
+    /// </returns>
+    public static AsyncValue<TResult> SelectMany<T, TResult>(
+        this AsyncValue<T> source,
+        Func<T, AsyncValue<TResult>> selector)
+    {
+        return source.Match(
+            onData: outerData => selector(outerData),
+            onLoading: outerPreviousValue => outerPreviousValue.Match(
+                onJust: outerValue => selector(outerValue).Match<AsyncValue<TResult>>(
+                    onData: innerData => new AsyncLoading<TResult>(new Just<TResult>(innerData)),
+                    onLoading: innerPreviousData => new AsyncLoading<TResult>(innerPreviousData),
+                    onError: (error, innerPreviousData) => new AsyncError<TResult>(error, innerPreviousData)),
+                onNone: () => new AsyncLoading<TResult>(new None<TResult>())),
+            onError: (error, outerPreviousValue) => outerPreviousValue.Match(
+                onJust: outerValue => selector(outerValue).Match<AsyncValue<TResult>>(
+                    onData: innerData => new AsyncError<TResult>(error, new Just<TResult>(innerData)),
+                    onLoading: innerPreviousData => new AsyncError<TResult>(error, innerPreviousData),
+                    onError: (error, innerPreviousData) => new AsyncError<TResult>(error, innerPreviousData)),
+                onNone: () => new AsyncError<TResult>(error, new None<TResult>())));
+    }
+
+    /// <summary>
+    /// Maps a AsyncValue&lt;T&gt; into a AsyncValue&lt;TResult&gt; by applying
+    /// the given <paramref name="maybeSelector"/>, flattens the result, and
+    /// applies the given <paramref name="resultSelector"/>.
+    /// </summary>
+    /// <typeparam name="T">Type of associated immutable value.</typeparam>
+    /// <typeparam name="TAsyncValue">
+    /// Type of nested immutable value.
+    /// </typeparam>
+    /// <typeparam name="TResult">Type of resulting immutable value.</typeparam>
+    /// <param name="source">The source of the optional value.</param>
+    /// <param name="maybeSelector">The selector to apply.</param>
+    /// <param name="resultSelector">The final result selector to apply.</param>
+    /// <returns>
+    /// <paramref name="source"/> mapped via given
+    /// <paramref name="maybeSelector"/>, and then by given
+    /// <paramref name="resultSelector"/>.
+    /// </returns>
+    public static AsyncValue<TResult> SelectMany<T, TAsyncValue, TResult>(
+        this AsyncValue<T> source,
+        Func<T, AsyncValue<TAsyncValue>> maybeSelector,
+        Func<T, TAsyncValue, TResult> resultSelector)
+    {
+        return source
+            .SelectMany(x => maybeSelector(x)
+            .Select(y => resultSelector(x, y)));
+    }
 }

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-03-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rearch.reactor` - `v0.0.0-dev.4`](#rearch.reactor---v000-dev4)
+
+Packages with other changes:
+
+ - [`rearch` - `v0.0.0-dev.4`](#rearch---v000-dev4)
+
+---
+
+#### `rearch.reactor` - `v0.0.0-dev.4`
+
+ - **FIX**: bug fixes and prototype todo list example app.
+ - **FEAT**: allow type inference in capsule warm up.
+ - **FEAT**: allow generic type props in capsule consumers.
+
+#### `rearch` - `v0.0.0-dev.4`
+
+ - **FIX**: bug fixes and prototype todo list example app.
+
+
 ## 2024-02-22
 
 ### Changes
@@ -16,7 +43,7 @@ Packages with breaking changes:
 Packages with other changes:
 
  - [`rearch` - `v0.0.0-dev.3`](#rearch---v000-dev3)
- - [`flutter_rearch` - `v0.0.0-dev.3`](#flutter_rearch---v000-dev3)
+ - [`rearch.reactor` - `v0.0.0-dev.3`](#rearch.reactor---v000-dev3)
 
 ---
 

@@ -1,13 +1,12 @@
 ﻿using MauiReactor;
 using Microsoft.Extensions.Logging;
-using ReactorData;
 using ReactorData.Sqlite;
 using System;
 using System.IO;
-using System.Reflection.Metadata;
 using Rearch.Reactor.Components;
 using Rearch.Reactor.Example.Models;
 using Rearch.Reactor.Example.Pages;
+using Rearch.Reactor.Example.Helpers;
 
 namespace Rearch.Reactor.Example;
 
@@ -62,6 +61,10 @@ public static class MauiProgram
             });
 
 
-        return builder.Build();
+        var mauiApp = builder.Build();
+
+        ServiceHelper.Initialize(mauiApp.Services);
+
+        return mauiApp;
     }
 }
