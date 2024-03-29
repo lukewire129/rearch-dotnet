@@ -4,7 +4,6 @@
 
 namespace Rearch.Reactor.Components;
 
-using System.Diagnostics;
 using MauiReactor;
 using MauiReactor.Parameters;
 
@@ -44,14 +43,16 @@ public abstract partial class CapsuleConsumer<TProps> : Component<object, TProps
         this.ClearDependencies();
 
         var container = this.containerParameter.Value.Container;
-        Debug.Assert(
-            container != null,
-            "No CapsuleContainerProvider found in the component tree!\nDid you forget to add UseRearchReactorApp to MauiProgram?");
-
-        return this.Render(
-          new ComponentHandle<TProps>(
-            new ComponentSideEffectApiProxy<TProps>(this),
-            container));
+        return container == null ?
+            throw new InvalidOperationException(
+                $"No {typeof(CapsuleContainerProvider<>).Name} found in the " +
+                $"component tree!\nDid you forget to add " +
+                $"{nameof(MauiAppBuilderExtensions.UseRearchReactorApp)} to " +
+                $"MauiProgram?") :
+            this.Render(
+                new ComponentHandle<TProps>(
+                    new ComponentSideEffectApiProxy<TProps>(this),
+                    container));
     }
 
     /// <summary>

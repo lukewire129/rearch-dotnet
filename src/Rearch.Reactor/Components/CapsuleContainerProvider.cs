@@ -15,8 +15,7 @@ using MauiReactor.Parameters;
 /// <remarks>
 /// Does not manage the lifecycle of the supplied
 /// <see cref="CapsuleContainer"/>. You typically should
-/// <see cref="MauiAppBuilderExtensions.UseRearchReactorApp{TComponent}(MauiAppBuilder, Action{MauiReactor.ReactorApplication}?)"/>
-/// instead.
+/// <see cref="MauiAppBuilderExtensions.UseRearchReactorApp"/> instead.
 /// </remarks>
 internal sealed partial class CapsuleContainerProvider<TComponent> : Component
     where TComponent : CapsuleConsumer, new()
