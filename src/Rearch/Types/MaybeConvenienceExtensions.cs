@@ -2,8 +2,6 @@
 // Copyright (c) SdgApps. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace Rearch.Types;
 
 /// <summary>
