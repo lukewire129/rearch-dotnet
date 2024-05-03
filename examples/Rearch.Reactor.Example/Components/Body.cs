@@ -36,7 +36,15 @@ partial class Body : CapsuleConsumer
                 .OnClicked(() => ShowCreateTodoDialogAsync(
                     ContainerPage, AddTodo)),
 
-                new TodoList()
+                isSearching ?
+                    Grid("Auto, *", "*",
+                        new SearchBar(
+                            close: () => setIsSearching(false)),
+
+                        new TodoList()
+                        .GridRow(1)
+                    ) :
+                    new TodoList()
             )
             .Title("rearch todos")
         );
