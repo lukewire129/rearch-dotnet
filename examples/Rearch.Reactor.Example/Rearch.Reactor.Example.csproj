@@ -58,20 +58,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
-    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.14" />
+    <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.14" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Reactor.Maui" Version="2.0.27" />
-    <PackageReference Include="Reactor.Maui.Canvas" Version="2.0.27" />
+    <PackageReference Include="Reactor.Maui" Version="2.0.37" />
+    <PackageReference Include="Reactor.Maui.Canvas" Version="2.0.37" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactorData" Version="1.0.10-beta" />
-    <PackageReference Include="ReactorData.Sqlite" Version="1.0.10-beta" />
+    <PackageReference Include="ReactorData" Version="1.0.17-beta" />
+    <PackageReference Include="ReactorData.Maui" Version="1.0.17-beta" />
+    <PackageReference Include="ReactorData.Sqlite" Version="1.0.17-beta" />
   </ItemGroup>
 
   <ItemGroup>

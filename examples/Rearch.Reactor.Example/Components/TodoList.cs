@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using MauiReactor;
-using Rearch.Reactor.Example.Models;
 using Rearch.Reactor.Components;
 using static Rearch.Reactor.Example.Capsules.TodoCapsules;
 using Rearch.Types;

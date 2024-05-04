@@ -4,6 +4,7 @@ using Rearch.Reactor.Example.Models;
 using Rearch.Reactor.Components;
 using Microsoft.Maui.Controls;
 using static Rearch.Reactor.Example.Capsules.TodoCapsules;
+using System.Threading.Tasks;
 
 namespace Rearch.Reactor.Example.Components;
 
@@ -38,7 +39,7 @@ internal class TodoItem(Todo item) : CapsuleConsumer
                 Label(item.Title)
                     .FormattedText(() =>
                     {
-                        FormattedString formattedString = new FormattedString();
+                        var formattedString = new FormattedString();
                         formattedString.Spans.Add(new Span
                         {
                             Text = item.Title,
@@ -53,7 +54,26 @@ internal class TodoItem(Todo item) : CapsuleConsumer
                     .GridRow(1)
                     .GridColumn(1)),
             TapGestureRecognizer(ToggleCompletionStatus, 1),
-            TapGestureRecognizer(Delete, 2)
+            TapGestureRecognizer(
+                async () => await ShowDeletionConfirmationDialogAsync(
+                    Delete,
+                    this.ContainerPage),
+                2)
         );
+    }
+
+    private static async Task ShowDeletionConfirmationDialogAsync(
+        Action delete,
+        MauiControls.Page? containerPage)
+    {
+        if (containerPage is not null &&
+            await containerPage.DisplayAlert(
+                "Delete Todo",
+                "Are you sure you want to delete this todo?",
+                "Delete",
+                "Cancel"))
+        {
+            delete();
+        }
     }
 }
