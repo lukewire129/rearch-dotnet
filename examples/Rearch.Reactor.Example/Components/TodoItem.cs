@@ -30,7 +30,7 @@ internal class TodoItem(Todo item) : CapsuleConsumer
             UpdateTodo(item);
         }
 
-        return Frame(
+        return Border(
             Grid("27, 27", "Auto, *",
                 CheckBox()
                     .IsChecked(item.Completed)
