@@ -11,17 +11,9 @@ namespace Rearch.Reactor.Example.Components;
 
 partial class Body : CapsuleConsumer
 {
-    private enum SearchState
-    {
-        Idle,
-        Searching,
-        Search,
-        Idling
-    }
-
     public override VisualNode Render(ICapsuleHandle use)
     {
-        var (searchState, setSearchState) = use.State(SearchState.Idle);
+        var (isSearching, setIsSearching) = use.State(false);
         var (searchHeight, setSearchHeight) = use.State(0d);
 
         var (AddTodo, _, _) = use.Invoke(TodoItemsManagerCapsule);
@@ -41,11 +33,7 @@ partial class Body : CapsuleConsumer
                 .OnClicked(toggleCompletionStatus),
 
                 ToolbarItem("Search")
-                .OnClicked(() => setSearchState(
-                    searchState == SearchState.Idle ? SearchState.Searching :
-                    searchState == SearchState.Searching ? SearchState.Idling :
-                    searchState == SearchState.Search ? SearchState.Idling :
-                    SearchState.Searching)),
+                .OnClicked(() => setIsSearching(!isSearching)),
 
                 ToolbarItem("Create")
                 .OnClicked(() => ShowCreateTodoDialogAsync(
@@ -54,11 +42,7 @@ partial class Body : CapsuleConsumer
                 Grid("Auto, *", "*",
                     new SearchBar(
                         height: searchHeight,
-                        close: () => setSearchState(
-                            searchState == SearchState.Idle ? SearchState.Searching :
-                            searchState == SearchState.Searching ? SearchState.Idling :
-                            searchState == SearchState.Search ? SearchState.Idling :
-                            SearchState.Searching)),
+                        close: () => setIsSearching(false)),
 
                     new TodoList()
                     .GridRow(1),
@@ -68,34 +52,15 @@ partial class Body : CapsuleConsumer
                         new SequenceAnimation
                         {
                             new DoubleAnimation()
-                                .StartValue(searchState == SearchState.Idling ? 50 : 0)
-                                .TargetValue(searchState == SearchState.Idling ? 0 : 50)
+                                .StartValue(isSearching ? 0 : 50)
+                                .TargetValue(isSearching ? 50 : 0)
                                 .Duration(1000)
-                                .OnTick(v =>
-                                {
-                                    setSearchHeight(v);
-                                    switch (searchState)
-                                    {
-                                        case SearchState.Searching:
-                                            if (v == 50)
-                                            {
-                                                setSearchState(SearchState.Search);
-                                            }
-
-                                            break;
-
-                                        case SearchState.Idling:
-                                            if (v == 0)
-                                            {
-                                                setSearchState(SearchState.Idle);
-                                            }
-
-                                            break;
-                                    }
-                                }),
+                                .OnTick(setSearchHeight),
                         }
                     }
-                    .IsEnabled(searchState == SearchState.Searching || searchState == SearchState.Idling)
+                    .IsEnabled(
+                        isSearching && searchHeight < 50 ||
+                        !isSearching && searchHeight > 0)
                 )
             )
             .Title("rearch todos")
