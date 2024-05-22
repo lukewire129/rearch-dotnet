@@ -35,7 +35,7 @@ partial class TodoList : CapsuleConsumer
                 [todoListWidget] :
                 Enumerable.Empty<VisualNode>())
                 .Concat(infoWidget != null ?
-                [Frame(infoWidget)] :
+                [Border(infoWidget)] :
                 Enumerable.Empty<VisualNode>())
                 .ToArray());
     }

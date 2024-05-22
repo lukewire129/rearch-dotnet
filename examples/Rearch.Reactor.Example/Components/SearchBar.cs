@@ -5,7 +5,7 @@ using static Rearch.Reactor.Example.Capsules.TodoCapsules;
 
 namespace Rearch.Reactor.Example.Components;
 
-internal class SearchBar(Action close) : CapsuleConsumer
+internal class SearchBar(double height, Action close) : CapsuleConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {
@@ -34,6 +34,7 @@ internal class SearchBar(Action close) : CapsuleConsumer
                             setQueryString(string.Empty);
                         }
                     })
-            );
+            )
+            .HeightRequest(height);
     }
 }
