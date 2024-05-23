@@ -110,7 +110,7 @@ public static class BuiltinSideEffectExtensions
         Func<T> init)
     {
         // We use register directly to keep the same setter function
-        // across rebuilds, which actually can help skip certain rebuilds
+        // across rebuilds
         return registrar.Register<(Func<T>, Action<T>)>(api =>
         {
             var state = init();
@@ -118,8 +118,11 @@ public static class BuiltinSideEffectExtensions
             T Getter() => state;
             void Setter(T newState)
             {
-                state = newState;
-                api.Rebuild();
+                if (!EqualityComparer<T>.Default.Equals(newState, state))
+                {
+                    state = newState;
+                    api.Rebuild();
+                }
             }
 
             return (Getter, Setter);
