@@ -1,4 +1,4 @@
-// <copyright file="CapsuleConsumer.cs" company="SdgApps">
+// <copyright file="RearchConsumer.cs" company="SdgApps">
 // Copyright (c) SdgApps. All rights reserved.
 // </copyright>
 
@@ -11,6 +11,6 @@ using MauiReactor;
 /// <see cref="ICapsuleHandle"/>, and can consequently consume
 /// <see cref="Capsule{T}"/>s and <see cref="SideEffect{T}"/>s.
 /// </summary>
-public abstract partial class CapsuleConsumer : CapsuleConsumer<object>
+public abstract partial class RearchConsumer : RearchConsumer<object>
 {
 }

@@ -4,7 +4,7 @@ using Rearch.Reactor.Example.Models;
 
 namespace Rearch.Reactor.Example.Pages;
 
-partial class CreateTodoPage : CapsuleConsumer<CreateTodoPageProps>
+partial class CreateTodoPage : RearchConsumer<CreateTodoPageProps>
 {
     private string title = string.Empty;
     private string description = string.Empty;
@@ -28,7 +28,7 @@ partial class CreateTodoPage : CapsuleConsumer<CreateTodoPageProps>
                     Button("Save")
                     .OnClicked(() =>
                     {
-                        this.Props.TodoCreator?.Invoke(new Todo
+                        this.Props.TodoCreator(new Todo
                         {
                             Title = this.title,
                             Description = string.IsNullOrEmpty(this.description) ? null : description,

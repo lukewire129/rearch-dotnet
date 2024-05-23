@@ -8,7 +8,7 @@ using MauiReactor.Animations;
 
 namespace Rearch.Reactor.Example.Components;
 
-partial class Body : CapsuleConsumer
+partial class Body : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {

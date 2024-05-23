@@ -18,7 +18,7 @@ using MauiReactor.Parameters;
 /// <see cref="MauiAppBuilderExtensions.UseRearchReactorApp"/> instead.
 /// </remarks>
 internal sealed partial class CapsuleContainerProvider<TComponent> : Component
-    where TComponent : CapsuleConsumer, new()
+    where TComponent : RearchConsumer, new()
 {
     [Param]
     private readonly IParameter<CapsuleContainerParameter> containerParameter;

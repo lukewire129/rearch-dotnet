@@ -4,11 +4,10 @@ using Rearch.Reactor.Example.Models;
 using Rearch.Reactor.Components;
 using Microsoft.Maui.Controls;
 using static Rearch.Reactor.Example.Capsules.TodoCapsules;
-using System.Threading.Tasks;
 
 namespace Rearch.Reactor.Example.Components;
 
-internal class TodoItem(Todo item) : CapsuleConsumer
+internal class TodoItem(Todo item) : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {
@@ -30,7 +29,7 @@ internal class TodoItem(Todo item) : CapsuleConsumer
             UpdateTodo(item);
         }
 
-        return Border(
+        return Frame(
             Grid("27, 27", "Auto, *",
                 CheckBox()
                     .IsChecked(item.Completed)
@@ -39,7 +38,7 @@ internal class TodoItem(Todo item) : CapsuleConsumer
                 Label(item.Title)
                     .FormattedText(() =>
                     {
-                        var formattedString = new FormattedString();
+                        FormattedString formattedString = new FormattedString();
                         formattedString.Spans.Add(new Span
                         {
                             Text = item.Title,
@@ -54,26 +53,7 @@ internal class TodoItem(Todo item) : CapsuleConsumer
                     .GridRow(1)
                     .GridColumn(1)),
             TapGestureRecognizer(ToggleCompletionStatus, 1),
-            TapGestureRecognizer(
-                async () => await ShowDeletionConfirmationDialogAsync(
-                    Delete,
-                    this.ContainerPage),
-                2)
+            TapGestureRecognizer(Delete, 2)
         );
-    }
-
-    private static async Task ShowDeletionConfirmationDialogAsync(
-        Action delete,
-        MauiControls.Page? containerPage)
-    {
-        if (containerPage is not null &&
-            await containerPage.DisplayAlert(
-                "Delete Todo",
-                "Are you sure you want to delete this todo?",
-                "Delete",
-                "Cancel"))
-        {
-            delete();
-        }
     }
 }
