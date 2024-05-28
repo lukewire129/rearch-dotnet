@@ -4,7 +4,7 @@ using Rearch.Reactor.Example.Models;
 
 namespace Rearch.Reactor.Example.Pages;
 
-partial class CreateTodoPage : CapsuleConsumer<CreateTodoPageProps>
+partial class CreateTodoPage : RearchConsumer<CreateTodoPageProps>
 {
     private string title = string.Empty;
     private string description = string.Empty;

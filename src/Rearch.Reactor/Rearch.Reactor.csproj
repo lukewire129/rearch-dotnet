@@ -15,7 +15,16 @@
     <Copyright>Copyright (c) Soli Deo Gloria Apps. All rights reserved.</Copyright>
     <Description>A re-imagined declarative approach to application design and architecture.  C# port of [rearch-dart](https://github.com/GregoryConrad/rearch-dart/).</Description>
 
-    <PackageReleaseNotes>v0.0.0-dev.4
+    <PackageReleaseNotes>v0.0.0-dev.5
+
+> Note: This release has breaking changes.
+
+ - FEAT: add state side effects for closure capture.
+ - FEAT: made todo example app more sophisticated.
+ - DOCS: finish the todo example app.
+ - BREAKING REFACTOR: rename CapsuleConsumer to RearchConsumer.
+
+v0.0.0-dev.4
  - FIX: bug fixes and prototype todo list example app.
  - FEAT: allow type inference in capsule warm up.
  - FEAT: allow generic type props in capsule consumers.
@@ -27,7 +36,7 @@ v0.0.0-dev.2
  - FEAT: initial impl of rearch.reactor.
  - FEAT: working mvp.</PackageReleaseNotes>
 
-    <Version>0.0.0-dev.4</Version>
+    <Version>0.0.0-dev.5</Version>
   </PropertyGroup>
 
   <ItemGroup>

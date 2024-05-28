@@ -1,4 +1,4 @@
-// <copyright file="CapsuleConsumer{TProps}.cs" company="SdgApps">
+// <copyright file="RearchConsumer{TProps}.cs" company="SdgApps">
 // Copyright (c) SdgApps. All rights reserved.
 // </copyright>
 
@@ -13,7 +13,7 @@ using MauiReactor.Parameters;
 /// <see cref="Capsule{T}"/>s and <see cref="SideEffect{T}"/>s.
 /// </summary>
 /// <typeparam name="TProps">Type of component props.</typeparam>
-public abstract partial class CapsuleConsumer<TProps> : Component<object, TProps>
+public abstract partial class RearchConsumer<TProps> : Component<object, TProps>
     where TProps : class, new()
 {
     [Param]
@@ -86,7 +86,7 @@ public abstract partial class CapsuleConsumer<TProps> : Component<object, TProps
 
     /// <summary>
     /// Clears out the <see cref="Capsule{T}"/> dependencies of this
-    /// <see cref="CapsuleConsumer"/>.
+    /// <see cref="RearchConsumer"/>.
     /// </summary>
     private void ClearDependencies()
     {

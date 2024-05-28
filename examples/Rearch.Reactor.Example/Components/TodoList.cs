@@ -6,7 +6,7 @@ using Rearch.Types;
 
 namespace Rearch.Reactor.Example.Components;
 
-partial class TodoList : CapsuleConsumer
+partial class TodoList : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {
@@ -35,7 +35,7 @@ partial class TodoList : CapsuleConsumer
                 [todoListWidget] :
                 Enumerable.Empty<VisualNode>())
                 .Concat(infoWidget != null ?
-                [Border(infoWidget)] :
+                [Frame(infoWidget)] :
                 Enumerable.Empty<VisualNode>())
                 .ToArray());
     }

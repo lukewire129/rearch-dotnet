@@ -4,7 +4,7 @@ using Rearch.Reactor.Example.Components;
 
 namespace Rearch.Reactor.Example.Pages;
 
-partial class MainPage : CapsuleConsumer
+partial class MainPage : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {

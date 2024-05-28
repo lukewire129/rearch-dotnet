@@ -93,6 +93,66 @@ public static class BuiltinSideEffectExtensions
     /// <summary>
     /// Side effect that provides a way for capsules to contain some state,
     /// where the initial state is computationally expensive.
+    /// Further, instead of returning the state directly, this instead returns
+    /// a getter that is safe to capture in closures.
+    /// </summary>
+    /// <typeparam name="T">Type of side effect state.</typeparam>
+    /// <param name="registrar">Side effect registrar.</param>
+    /// <param name="init">Callback to initialize side effect state.</param>
+    /// <returns>Side effect state and setter.</returns>
+    /// <remarks>
+    /// Similar to the <c>useState</c> hook from React;
+    /// see https://react.dev/reference/react/useState.
+    /// </remarks>
+    public static (Func<T> GetState, Action<T> SetState)
+        LazyStateGetterSetter<T>(
+        this ISideEffectRegistrar registrar,
+        Func<T> init)
+    {
+        // We use register directly to keep the same setter function
+        // across rebuilds
+        return registrar.Register<(Func<T>, Action<T>)>(api =>
+        {
+            var state = init();
+
+            T Getter() => state;
+            void Setter(T newState)
+            {
+                if (!EqualityComparer<T>.Default.Equals(newState, state))
+                {
+                    state = newState;
+                    api.Rebuild();
+                }
+            }
+
+            return (Getter, Setter);
+        });
+    }
+
+    /// <summary>
+    /// Side effect that provides a way for capsules to contain some state.
+    /// Further, instead of returning the state directly, this instead returns
+    /// a getter that is safe to capture in closures.
+    /// </summary>
+    /// <typeparam name="T">Type of side effect state.</typeparam>
+    /// <param name="registrar">Side effect registrar.</param>
+    /// <param name="initial">Initial side effect state.</param>
+    /// <returns>Side effect state and setter.</returns>
+    /// <remarks>
+    /// Similar to the <c>useState</c> hook from React;
+    /// see https://react.dev/reference/react/useState.
+    /// </remarks>
+    public static (Func<T> GetState, Action<T> SetState)
+        StateGetterSetter<T>(
+        this ISideEffectRegistrar registrar,
+        T initial) =>
+        registrar.LazyStateGetterSetter(() => initial);
+
+    /// <summary>
+    /// Side effect that provides a way for capsules to contain some state,
+    /// where the initial state is computationally expensive.
+    /// Further, instead of returning the state directly, this instead returns
+    /// a getter that is safe to capture in closures.
     /// </summary>
     /// <typeparam name="T">Type of side effect state.</typeparam>
     /// <param name="registrar">Side effect registrar.</param>
@@ -106,22 +166,7 @@ public static class BuiltinSideEffectExtensions
         this ISideEffectRegistrar registrar,
         Func<T> init)
     {
-        // We use register directly to keep the same setter function
-        // across rebuilds, which actually can help skip certain rebuilds
-        var (getter, setter) = registrar.Register<(Func<T>, Action<T>)>(api =>
-        {
-            var state = init();
-
-            T Getter() => state;
-            void Setter(T newState)
-            {
-                state = newState;
-                api.Rebuild();
-            }
-
-            return (Getter, Setter);
-        });
-
+        var (getter, setter) = registrar.LazyStateGetterSetter(init);
         return (getter(), setter);
     }
 

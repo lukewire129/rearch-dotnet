@@ -23,7 +23,7 @@ public static class MauiAppBuilderExtensions
     public static MauiAppBuilder UseRearchReactorApp<TComponent>(
         this MauiAppBuilder appBuilder,
         Action<ReactorApplication>? configureApplication = null)
-        where TComponent : CapsuleConsumer, new() =>
+        where TComponent : RearchConsumer, new() =>
         appBuilder.UseMauiReactorApp<
             CapsuleContainerProvider<TComponent>>(
             configureApplication);

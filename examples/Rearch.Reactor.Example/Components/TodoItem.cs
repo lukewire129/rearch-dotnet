@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Rearch.Reactor.Example.Components;
 
-internal class TodoItem(Todo item) : CapsuleConsumer
+internal class TodoItem(Todo item) : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {

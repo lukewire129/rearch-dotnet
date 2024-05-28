@@ -8,7 +8,7 @@ using static Rearch.Reactor.Example.Capsules.ContextCapsules;
 
 namespace Rearch.Reactor.Example.Components;
 
-partial class GlobalWarmUps(VisualNode child) : CapsuleConsumer
+partial class GlobalWarmUps(VisualNode child) : RearchConsumer
 {
     public override VisualNode Render(ICapsuleHandle use)
     {

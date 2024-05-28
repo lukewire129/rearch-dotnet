@@ -12,13 +12,13 @@ using MauiReactor;
 /// </summary>
 /// <typeparam name="TProps">Type of component props.</typeparam>
 internal sealed class ComponentSideEffectApiProxy<TProps>(
-    CapsuleConsumer<TProps> manager) : ISideEffectApi
+    RearchConsumer<TProps> manager) : ISideEffectApi
     where TProps : class, new()
 {
     /// <summary>
     /// Gets component consuming capsule's data.
     /// </summary>
-    internal CapsuleConsumer<TProps> Manager { get; } = manager;
+    internal RearchConsumer<TProps> Manager { get; } = manager;
 
     /// <inheritdoc/>
     public void Rebuild() => this.Manager.Invalidate();

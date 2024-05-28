@@ -12,7 +12,7 @@ internal sealed class CapsuleContainerParameter()
     /// <summary>
     /// Gets or sets container provided by
     /// <see cref="CapsuleContainerProvider{TComponent}"/> and used by
-    /// <see cref="CapsuleConsumer"/>.
+    /// <see cref="RearchConsumer"/>.
     /// </summary>
     internal CapsuleContainer? Container { get; set; }
 }

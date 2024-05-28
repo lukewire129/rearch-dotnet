@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2024-05-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - [`rearch.reactor` - `v0.0.0-dev.5`](#rearch.reactor---v000-dev5)
+
+Packages with other changes:
+
+ - [`rearch` - `v0.0.0-dev.5`](#rearch---v000-dev5)
+
+---
+
+#### `rearch.reactor` - `v0.0.0-dev.5`
+
+ - **FEAT**: add state side effects for closure capture.
+ - **FEAT**: made todo example app more sophisticated.
+ - **DOCS**: finish the todo example app.
+ - **BREAKING** **REFACTOR**: rename CapsuleConsumer to RearchConsumer.
+
+#### `rearch` - `v0.0.0-dev.5`
+
+ - **PERF**: add state effect == optimization.
+ - **FEAT**: add state side effects for closure capture.
+
 ## 2024-03-28
 
 ### Changes

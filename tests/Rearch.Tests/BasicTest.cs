@@ -293,7 +293,7 @@ public class BasicTest
         Assert.Equal(1, builds[(object)ChangingWatcher]);
 
         container.Read(Stateful).Item2(0);
-        Assert.Equal(2, builds[(object)Stateful]);
+        Assert.Equal(1, builds[(object)Stateful]);
         Assert.Equal(1, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(1, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(1, builds[(object)UnchangingWatcher]);
@@ -301,14 +301,14 @@ public class BasicTest
 
         Assert.Equal(0, container.Read(UnchangingWatcher));
         Assert.Equal(0, container.Read(ChangingWatcher));
-        Assert.Equal(2, builds[(object)Stateful]);
+        Assert.Equal(1, builds[(object)Stateful]);
         Assert.Equal(1, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(1, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(1, builds[(object)UnchangingWatcher]);
         Assert.Equal(1, builds[(object)ChangingWatcher]);
 
         container.Read(Stateful).Item2(1);
-        Assert.Equal(3, builds[(object)Stateful]);
+        Assert.Equal(2, builds[(object)Stateful]);
         Assert.Equal(1, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(1, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(1, builds[(object)UnchangingWatcher]);
@@ -316,7 +316,7 @@ public class BasicTest
 
         Assert.Equal(0, container.Read(UnchangingWatcher));
         Assert.Equal(1, container.Read(ChangingWatcher));
-        Assert.Equal(3, builds[(object)Stateful]);
+        Assert.Equal(2, builds[(object)Stateful]);
         Assert.Equal(2, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(2, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(2, builds[(object)UnchangingWatcher]);
@@ -326,7 +326,7 @@ public class BasicTest
         container.Read(ImpureSink);
 
         container.Read(Stateful).Item2(2);
-        Assert.Equal(4, builds[(object)Stateful]);
+        Assert.Equal(3, builds[(object)Stateful]);
         Assert.Equal(3, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(3, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(2, builds[(object)UnchangingWatcher]);
@@ -334,7 +334,7 @@ public class BasicTest
 
         Assert.Equal(0, container.Read(UnchangingWatcher));
         Assert.Equal(2, container.Read(ChangingWatcher));
-        Assert.Equal(4, builds[(object)Stateful]);
+        Assert.Equal(3, builds[(object)Stateful]);
         Assert.Equal(3, builds[(object)UnchangingSuperPureDep]);
         Assert.Equal(3, builds[(object)ChangingSuperPureDep]);
         Assert.Equal(2, builds[(object)UnchangingWatcher]);
@@ -488,7 +488,7 @@ public class BasicTest
         container.Read(A).Item2(0);
         Assert.Equal(1, container.Read(D));
         Assert.Equal(2, container.Read(G));
-        Assert.Equal(2, builds[(object)A]);
+        Assert.Equal(1, builds[(object)A]);
         Assert.Equal(1, builds[(object)B]);
         Assert.Equal(1, builds[(object)C]);
         Assert.Equal(1, builds[(object)D]);
@@ -498,7 +498,7 @@ public class BasicTest
         Assert.Equal(1, builds[(object)H]);
 
         container.Read(A).Item2(1);
-        Assert.Equal(3, builds[(object)A]);
+        Assert.Equal(2, builds[(object)A]);
         Assert.Equal(2, builds[(object)B]);
         Assert.Equal(1, builds[(object)C]);
         Assert.Equal(1, builds[(object)D]);
@@ -509,7 +509,7 @@ public class BasicTest
 
         Assert.Equal(3, container.Read(D));
         Assert.Equal(5, container.Read(G));
-        Assert.Equal(3, builds[(object)A]);
+        Assert.Equal(2, builds[(object)A]);
         Assert.Equal(2, builds[(object)B]);
         Assert.Equal(2, builds[(object)C]);
         Assert.Equal(2, builds[(object)D]);
