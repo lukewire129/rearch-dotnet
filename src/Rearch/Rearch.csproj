@@ -15,7 +15,12 @@
     <Copyright>Copyright (c) Soli Deo Gloria Apps. All rights reserved.</Copyright>
     <Description>A re-imagined declarative approach to application design and architecture.  C# port of [rearch-dart](https://github.com/GregoryConrad/rearch-dart/).</Description>
 
-    <PackageReleaseNotes>v0.0.0-dev.4
+    <PackageReleaseNotes>v0.0.0-dev.5
+
+ - PERF: add state effect == optimization.
+ - FEAT: add state side effects for closure capture.
+
+v0.0.0-dev.4
  - FIX: bug fixes and prototype todo list example app.
 
 v0.0.0-dev.3
@@ -29,7 +34,7 @@ v0.0.0-dev.1
  - FEAT: add == check to skip some rebuilds.
  - FEAT: working mvp.</PackageReleaseNotes>
 
-    <Version>0.0.0-dev.4</Version>
+    <Version>0.0.0-dev.5</Version>
   </PropertyGroup>
 
   <ItemGroup>
