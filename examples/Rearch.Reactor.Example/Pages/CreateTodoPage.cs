@@ -28,7 +28,7 @@ partial class CreateTodoPage : RearchConsumer<CreateTodoPageProps>
                     Button("Save")
                     .OnClicked(() =>
                     {
-                        this.Props.TodoCreator(new Todo
+                        this.Props.TodoCreator?.Invoke(new Todo
                         {
                             Title = this.title,
                             Description = string.IsNullOrEmpty(this.description) ? null : description,
