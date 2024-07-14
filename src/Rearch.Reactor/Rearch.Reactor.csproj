@@ -17,7 +17,7 @@
 
     <PackageReleaseNotes>v0.0.0-dev.5
 
-> Note: This release has breaking changes.
+&gt; Note: This release has breaking changes.
 
  - FEAT: add state side effects for closure capture.
  - FEAT: made todo example app more sophisticated.
@@ -59,8 +59,8 @@ v0.0.0-dev.2
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Reactor.Maui" Version="2.0.38" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.26.0.92422">
+    <PackageReference Include="Reactor.Maui" Version="2.0.42" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="9.29.0.95321">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
